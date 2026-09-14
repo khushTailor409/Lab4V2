@@ -12,7 +12,14 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-
+    public static double MEALS_REINBURSE = 37.00;
+    public static double PARKING_REINBURSE = 10.00;
+    public static double TAXI_REINBURSE = 20.00;
+    public static double LODGING_REINBURSE = 95.00;
+    public static double MILES_REINBURSE = 0.27;        
+          
+            
+            
     @Override
     public void start(Stage stage) {
         TextField numDays = new TextField();
@@ -31,7 +38,7 @@ public class App extends Application {
         Double regFees = Double.valueOf(registrationFees.getText());
         Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
         
-                
+        Double parkingFeesReinburse = (parckingFees < )        
                 
                 }
 
