@@ -20,8 +20,17 @@ public class App extends Application {
         TextField amountCarFees = new TextField();
         TextField numberMilesDriven = new TextField();
         TextField amountTaxiFees = new TextField();
+        TextField registrationFees = new TextField();
+        TextField lodgingCharge = new TextField();
         
-    
+        Double days = Double.valueOf(numDays.getText());
+        Double airfare = Double.valueOf(amountAirfare.getText());
+        Double carFees = Double.valueOf(amountCarFees.getText());
+        Double milesDriven = Double.valueOf(numberMilesDriven.getText());
+        Double taxiFees = Double.valueOf(amountTaxiFees.getText());
+        Double regFees = Double.valueOf(registrationFees.getText());
+        Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
+        
                 
                 
                 }
