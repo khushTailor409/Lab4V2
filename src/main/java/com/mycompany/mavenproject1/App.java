@@ -12,11 +12,11 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-    public static double MEALS_REINBURSE = 37.00;
-    public static double PARKING_REINBURSE = 10.00;
-    public static double TAXI_REINBURSE = 20.00;
-    public static double LODGING_REINBURSE = 95.00;
-    public static double MILES_REINBURSE = 0.27;        
+    public static double MEALS_REIMBURSE = 37.00;
+    public static double PARKING_REIMBURSE = 10.00;
+    public static double TAXI_REIMBURSE = 20.00;
+    public static double LODGING_REIMBURSE = 95.00;
+    public static double MILES_REIMBURSE = 0.27;        
           
             
             
@@ -26,6 +26,7 @@ public class App extends Application {
         TextField amountAirfare = new TextField();
         TextField amountCarFees = new TextField();
         TextField numberMilesDriven = new TextField();
+        TextField parkingFees = new TextField();
         TextField amountTaxiFees = new TextField();
         TextField registrationFees = new TextField();
         TextField lodgingCharge = new TextField();
@@ -34,13 +35,22 @@ public class App extends Application {
         Double airfare = Double.valueOf(amountAirfare.getText());
         Double carFees = Double.valueOf(amountCarFees.getText());
         Double milesDriven = Double.valueOf(numberMilesDriven.getText());
+        Double parkFees = Double.valueOf(parkingFees.getText());
         Double taxiFees = Double.valueOf(amountTaxiFees.getText());
         Double regFees = Double.valueOf(registrationFees.getText());
         Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
         
-        Double parkingFeesReinburse = (parckingFees < )        
-                
-                }
+        Double parkingFeesReimburse = (parkFees < PARKING_REIMBURSE)? PARKING_REIMBURSE - parkFees : PARKING_REIMBURSE;
+        Double taxiFeesReimburse = (taxiFees < TAXI_REIMBURSE)? TAXI_REIMBURSE - taxiFees : TAXI_REIMBURSE;
+        Double lodgingChargesReimburse = (lodgeCharge < LODGING_REIMBURSE)? LODGING_REIMBURSE - lodgeCharge : LODGING_REIMBURSE;
+        Double totalReimburse = (MEALS_REIMBURSE * days) + (MILES_REIMBURSE * milesDriven) + lodgingChargesReimburse + taxiFeesReimburse + parkingFeesReimburse;
+        
+        Double totalExpenses = airfare + carFees + parkFees + taxiFees + regFees + (lodgeCharge * days);
+        
+        Double excessExpenses = totalExpenses - totalReimburse;
+        
+        
+    }
 
     public static void main(String[] args) {
         launch();
