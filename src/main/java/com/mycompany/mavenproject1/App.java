@@ -29,6 +29,7 @@ public class App extends Application {
         TextField parkingFees = new TextField();
         TextField amountTaxiFees = new TextField();
         TextField registrationFees = new TextField();
+        TextField conferenceFees = new TextField();
         TextField lodgingCharge = new TextField();
         
         Double days = Double.valueOf(numDays.getText());
@@ -38,6 +39,7 @@ public class App extends Application {
         Double parkFees = Double.valueOf(parkingFees.getText());
         Double taxiFees = Double.valueOf(amountTaxiFees.getText());
         Double regFees = Double.valueOf(registrationFees.getText());
+        Double confFees = Double.valueOf(conferenceFees.getText());
         Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
         
         Double parkingFeesReimburse = (parkFees < PARKING_REIMBURSE)? PARKING_REIMBURSE - parkFees : PARKING_REIMBURSE;
@@ -49,8 +51,22 @@ public class App extends Application {
         
         Double excessExpenses = totalExpenses - totalReimburse;
         
+        Double amountSaved = totalReimburse; 
         
+
+        Label dayLabel = new Label("Enter number of day on trip");
+        Label airFareLabel = new Label("Enter amount of aifare");
+        Label carRentalLabel = new Label("Enter car rental fees");
+        Label milesLabel = new Label("Enter number of miles Driven");
+        Label parkingLabel = new Label("Enter parking fees amount");
+        Label taxiLabel = new Label("Enter taxi Charge");
+        Label conferenceLabel = new Label("Enter conference or seminar fees");
+        Label lodgingLabel = new Label("Enter lodgin charge per night");
+    
+
+
     }
+
 
     public static void main(String[] args) {
         launch();
