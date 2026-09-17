@@ -29,9 +29,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
 
-
-
-
         TextField numDays = new TextField();
         TextField amountAirfare = new TextField();
         TextField amountCarFees = new TextField();
@@ -48,6 +45,7 @@ public class HelloApplication extends Application {
         Label milesLabel = new Label("Enter number of miles Driven");
         Label parkingLabel = new Label("Enter parking fees amount");
         Label taxiLabel = new Label("Enter taxi Charge");
+        Label registrationLabel = new Label("Enter registration fees");
         Label conferenceLabel = new Label("Enter conference or seminar fees");
         Label lodgingLabel = new Label("Enter lodgin charge per night");
         Button btnCalculate = new Button("Calculate Result");
@@ -72,7 +70,7 @@ public class HelloApplication extends Application {
                     Double lodgingChargesReimburse = (lodgeCharge < LODGING_REIMBURSE) ? LODGING_REIMBURSE - lodgeCharge : LODGING_REIMBURSE;
                     Double totalReimburse = (MEALS_REIMBURSE * days) + (MILES_REIMBURSE * milesDriven) + lodgingChargesReimburse + taxiFeesReimburse + parkingFeesReimburse;
 
-                    Double totalExpenses = airfare + carFees + parkFees + taxiFees + regFees + (lodgeCharge * days);
+                    Double totalExpenses = airfare + carFees + parkFees + taxiFees + regFees + confFees + (lodgeCharge * days);
 
                     Double excessExpenses = totalExpenses - totalReimburse;
 
@@ -121,21 +119,46 @@ public class HelloApplication extends Application {
         grid.add(taxiLabel, 0, 5);
         grid.add(amountTaxiFees, 1, 5);
 
-        grid.add(conferenceLabel, 0, 6);
-        grid.add(conferenceFees, 1, 6);
+        grid.add(registrationLabel, 0, 6);
+        grid.add(registrationFees, 1, 6);
 
-        grid.add(lodgingLabel, 0, 7);
-        grid.add(lodgingCharge, 1, 7);
+        grid.add(conferenceLabel, 0, 7);
+        grid.add(conferenceFees, 1, 7);
+
+        grid.add(lodgingLabel, 0, 8);
+        grid.add(lodgingCharge, 1, 8);
 
     HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(btnCalculate);
 
-        grid.add(buttonBox, 0, 8);
+        grid.add(buttonBox, 0, 9);
+
+        grid.add(label,0, 10);
+
 
         root.setCenter(grid);
 
-    Scene scene = new Scene(root, 640, 480);
+        root.setStyle(
+                "-fx-background-color: black;" +
+                        "-fx-padding: 20;" +
+                        "-fx-border-style: solid;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-border-radius: 10;" +
+                        "-fx-border-color: grey;"
+        );
+        dayLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        airFareLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        carRentalLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        milesLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        parkingLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        taxiLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        registrationLabel.setStyle("-fx-font-weight: bold;" + "-fx-text-fill: white;" );
+        conferenceLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        lodgingLabel.setStyle("-fx-font-weight: bold;"+"-fx-text-fill: white;");
+        label.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
+
+    Scene scene = new Scene(root, 640, 550);
         stage.setTitle("Business Expense Calculator");
         stage.setScene(scene);
         stage.show();
