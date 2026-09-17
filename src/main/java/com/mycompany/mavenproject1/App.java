@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class HelloApplication extends Application {
     public static double MEALS_REIMBURSE = 37.00;
     public static double PARKING_REIMBURSE = 10.00;
     public static double TAXI_REIMBURSE = 20.00;
@@ -97,7 +97,6 @@ public class App extends Application {
     BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
 
-    Scene scene = new Scene(gridPane, 640, 480);
     GridPane grid = new GridPane();
         grid.setPadding(new Insets(10));
         grid.setVgap(10);
