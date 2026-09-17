@@ -1,6 +1,7 @@
-package com.mycompany.mavenproject1;
+package org.khush.stageexplorer;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,16 @@ public class App extends Application {
     public static double PARKING_REIMBURSE = 10.00;
     public static double TAXI_REIMBURSE = 20.00;
     public static double LODGING_REIMBURSE = 95.00;
-    public static double MILES_REIMBURSE = 0.27;        
-          
-            
-            
+    public static double MILES_REIMBURSE = 0.27;
+
+
+
     @Override
     public void start(Stage stage) {
+
+
+
+
         TextField numDays = new TextField();
         TextField amountAirfare = new TextField();
         TextField amountCarFees = new TextField();
@@ -36,28 +41,6 @@ public class App extends Application {
         TextField registrationFees = new TextField();
         TextField conferenceFees = new TextField();
         TextField lodgingCharge = new TextField();
-        
-        Double days = Double.valueOf(numDays.getText());
-        Double airfare = Double.valueOf(amountAirfare.getText());
-        Double carFees = Double.valueOf(amountCarFees.getText());
-        Double milesDriven = Double.valueOf(numberMilesDriven.getText());
-        Double parkFees = Double.valueOf(parkingFees.getText());
-        Double taxiFees = Double.valueOf(amountTaxiFees.getText());
-        Double regFees = Double.valueOf(registrationFees.getText());
-        Double confFees = Double.valueOf(conferenceFees.getText());
-        Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
-        
-        Double parkingFeesReimburse = (parkFees < PARKING_REIMBURSE)? PARKING_REIMBURSE - parkFees : PARKING_REIMBURSE;
-        Double taxiFeesReimburse = (taxiFees < TAXI_REIMBURSE)? TAXI_REIMBURSE - taxiFees : TAXI_REIMBURSE;
-        Double lodgingChargesReimburse = (lodgeCharge < LODGING_REIMBURSE)? LODGING_REIMBURSE - lodgeCharge : LODGING_REIMBURSE;
-        Double totalReimburse = (MEALS_REIMBURSE * days) + (MILES_REIMBURSE * milesDriven) + lodgingChargesReimburse + taxiFeesReimburse + parkingFeesReimburse;
-        
-        Double totalExpenses = airfare + carFees + parkFees + taxiFees + regFees + (lodgeCharge * days);
-        
-        Double excessExpenses = totalExpenses - totalReimburse;
-        
-        Double amountSaved = totalReimburse; 
-        
 
         Label dayLabel = new Label("Enter number of day on trip");
         Label airFareLabel = new Label("Enter amount of aifare");
@@ -68,63 +51,99 @@ public class App extends Application {
         Label conferenceLabel = new Label("Enter conference or seminar fees");
         Label lodgingLabel = new Label("Enter lodgin charge per night");
         Button btnCalculate = new Button("Calculate Result");
-        
-      
-    }
-        GridPane gridPane = new GridPane();
-        gridPane.setnewPadding(new Insets(10));
+        Label label = new Label();
+
+            btnCalculate.setOnAction(e -> {
+                try {
+
+
+                    Double days = Double.valueOf(numDays.getText());
+                    Double airfare = Double.valueOf(amountAirfare.getText());
+                    Double carFees = Double.valueOf(amountCarFees.getText());
+                    Double milesDriven = Double.valueOf(numberMilesDriven.getText());
+                    Double parkFees = Double.valueOf(parkingFees.getText());
+                    Double taxiFees = Double.valueOf(amountTaxiFees.getText());
+                    Double regFees = Double.valueOf(registrationFees.getText());
+                    Double confFees = Double.valueOf(conferenceFees.getText());
+                    Double lodgeCharge = Double.valueOf(lodgingCharge.getText());
+
+                    Double parkingFeesReimburse = (parkFees < PARKING_REIMBURSE) ? PARKING_REIMBURSE - parkFees : PARKING_REIMBURSE;
+                    Double taxiFeesReimburse = (taxiFees < TAXI_REIMBURSE) ? TAXI_REIMBURSE - taxiFees : TAXI_REIMBURSE;
+                    Double lodgingChargesReimburse = (lodgeCharge < LODGING_REIMBURSE) ? LODGING_REIMBURSE - lodgeCharge : LODGING_REIMBURSE;
+                    Double totalReimburse = (MEALS_REIMBURSE * days) + (MILES_REIMBURSE * milesDriven) + lodgingChargesReimburse + taxiFeesReimburse + parkingFeesReimburse;
+
+                    Double totalExpenses = airfare + carFees + parkFees + taxiFees + regFees + (lodgeCharge * days);
+
+                    Double excessExpenses = totalExpenses - totalReimburse;
+
+                    Double amountSaved = totalReimburse;
+
+
+                    if (totalExpenses == 0) {
+                        totalReimburse = 0.0;
+                        amountSaved = 0.0;
+
+                    }
+                    label.setText(String.format("Total Reimbursement: $%.2f%nExcess Expenses: $%.2f%nAmount Saved: $%.2f", totalReimburse, excessExpenses, amountSaved));
+                } catch (NumberFormatException ex) {
+                    label.setText("Please enter valid numbers in all fields.");
+                }
+
+            });
+    GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10));
         gridPane.setVgap(10);
         gridPane.setHgap(10);
-        BorderPane root = new BorderPane();
+    BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
 
-        Scene scene = new Scene(gridPane, 640, 480);
-        GridPane grid = new GridPane();
+    Scene scene = new Scene(gridPane, 640, 480);
+    GridPane grid = new GridPane();
         grid.setPadding(new Insets(10));
         grid.setVgap(10);
         grid.setHgap(10);
         grid.setAlignment(Pos.CENTER);
-        
+
         grid.add(dayLabel, 0, 0);
         grid.add(numDays, 1, 0);
-        
+
         grid.add(airFareLabel, 0, 1);
         grid.add(amountAirfare, 1, 1);
-        
-        grid.add(carFeesLabel, 0, 2);
+
+        grid.add(carRentalLabel, 0, 2);
         grid.add(amountCarFees, 1, 2);
-        
-        grid.add(milesDrivenLabel, 0, 3);
-        grid.add(numMilesDriven, 1, 3);
-        
-        grid.add(parkingFeesLabel, 0, 4);
-        grid.add(amountParkingFees, 1, 4);
-        
-        grid.add(taxiFeesLabel, 0, 5);
+
+        grid.add(milesLabel, 0, 3);
+        grid.add(numberMilesDriven, 1, 3);
+
+        grid.add(parkingLabel, 0, 4);
+        grid.add(parkingFees, 1, 4);
+
+        grid.add(taxiLabel, 0, 5);
         grid.add(amountTaxiFees, 1, 5);
-        
-        grid.add(registrationFeesLabel, 0, 6);
-        grid.add(amountRegistrationFees, 1, 6);
-        
-        grid.add(lodgingChargesLabel, 0, 7);
-        grid.add(amountLodgingCharges, 1, 7);
-        
-        HBox buttonBox = new HBox(10);
+
+        grid.add(conferenceLabel, 0, 6);
+        grid.add(conferenceFees, 1, 6);
+
+        grid.add(lodgingLabel, 0, 7);
+        grid.add(lodgingCharge, 1, 7);
+
+    HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(btnCalculate);
-        
+
         grid.add(buttonBox, 0, 8);
-        
+
         root.setCenter(grid);
-        
-        Scene scene = new Scene(root, 640, 480);
+
+    Scene scene = new Scene(root, 640, 480);
         stage.setTitle("Business Expense Calculator");
         stage.setScene(scene);
         stage.show();
-    }
+}
 
-    public static void main(String[] args) {
-        launch();
-    }
+public static void main(String[] args) {
+    launch();
+}
 
 }
